@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <title>Using NotebookLM and learning: Does it help, does it hurt, or does it depend?</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
 <style>
 :root{
   --bg:#F5F4EF; --card:#FFFFFF; --ink:#1F2937; --muted:#59616E; --line:#E3E1D9;
@@ -53,11 +53,11 @@ a{color:var(--teal)}
 .hero{padding:40px 34px 34px}
 .kick{font-size:15px;color:var(--muted);margin:0 0 10px}
 .hero h1{font-size:46px;line-height:1.1;margin:0 0 10px}
-.sub{font-family:var(--serif);font-size:26px;line-height:1.3;color:var(--teal);margin:0 0 26px;max-width:24ch}
+.sub{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.3;color:var(--teal);margin:0 0 26px;max-width:24ch}
 .studyblock{margin:0 0 16px}
 .studylabel{display:block;font-size:14px;color:var(--muted);margin:0 0 2px}
-.studytitle{font-family:var(--serif);font-size:19px;line-height:1.4;color:var(--ink);max-width:48ch;margin:0}
-.seeit{font-family:var(--serif);font-size:22px;line-height:1.3;color:var(--ink);margin:0 0 18px}
+.studytitle{font-family:var(--serif);font-weight:400;font-size:19px;line-height:1.4;color:var(--ink);max-width:48ch;margin:0}
+.seeit{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.3;color:var(--ink);margin:0 0 18px}
 .split>div{min-width:0}
 .facts-col{display:grid;gap:10px;min-width:0}
 .stat{border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center;display:flex;flex-direction:column;justify-content:center;min-width:0}
@@ -85,12 +85,40 @@ a{color:var(--teal)}
 .lab{font-size:14px;color:var(--muted)}
 .val{font-weight:600;text-align:right}
 .trk{position:relative;height:30px;background:var(--track);border-radius:6px;touch-action:none;cursor:ew-resize}
+.trk.fixed{cursor:inherit}
 .fixed{cursor:default}
 .bar{position:absolute;left:0;top:0;bottom:0;border-radius:6px}
 .base{position:absolute;top:-4px;bottom:-4px;left:38.67%;border-left:2px dashed var(--muted);z-index:5;pointer-events:none}
 .ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
 .err{color:var(--danger);font-size:14px;min-height:21px;margin:10px 0 0}
 .fb{min-height:52px;margin:6px 0 0}
+.line{position:relative;height:112px;margin:6px 6px 0;touch-action:none}
+.rail{position:absolute;left:0;right:0;top:72px;height:8px;border-radius:4px;background:var(--track);border:1px solid var(--line)}
+.stop{position:absolute;top:0;transform:translateX(-50%);text-align:center;font-size:12px;color:var(--muted);line-height:1.25;width:130px}
+.stop b{display:block;font-size:16px;color:var(--ink)}
+.stop::after{content:"";display:block;width:2px;height:24px;background:var(--gray);margin:2px auto 0}
+.hd{position:absolute;top:64px;width:26px;height:26px;border-radius:50%;background:var(--card);border:4px solid var(--teal);transform:translateX(-50%);cursor:ew-resize;z-index:3}
+.hd:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.hd.pulse{animation:pl 1.4s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(15,118,110,.45)}70%{box-shadow:0 0 0 12px rgba(15,118,110,0)}100%{box-shadow:0 0 0 0 rgba(15,118,110,0)}}
+.gv{position:absolute;top:94px;transform:translateX(-50%);font-size:13px;font-weight:600;color:var(--teal);white-space:nowrap}
+.real{position:absolute;top:64px;width:26px;height:26px;border-radius:50%;background:var(--mid);transform:translateX(-50%);display:none;border:3px solid var(--card);z-index:2}
+.measure{font-size:16px;color:var(--ink);margin:0 0 14px;line-height:1.55;border-left:3px solid var(--line);padding-left:12px}
+.mlab{font-weight:400;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.qhead{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.55;margin:0 0 14px;color:var(--ink)}
+.dtxt{font-size:16px;color:var(--ink)}
+.lede.dark{color:var(--ink)}
+.chartwrap{margin:16px 0 0}
+.gm{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed var(--ink);z-index:5;display:none}
+.bar.anim{transition:width .9s ease-out}
+.pickmsg{display:none}
+.disc{padding:12px 14px;border-radius:12px;background:var(--ok-bg);border:1px solid var(--teal)}
+.stepno{font-size:13px;color:var(--muted);margin:0 0 6px}
+.orderlab{font-size:13px;color:var(--muted);margin:16px 0 6px}
+.order3{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.chip3{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--card)}
+.arr{color:var(--muted)}
+.bigq{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.35;margin:0 0 12px;color:var(--ink)}
 .chart-label{font-size:14px;color:var(--muted);margin:0 0 12px}
 
 /* green box and sortable list */
@@ -100,30 +128,20 @@ a{color:var(--teal)}
 .green ul{margin:6px 0 0;padding-left:20px}
 .green .gnote{margin:12px 0 0;font-size:15px}
 .green li{margin:0 0 4px}
-.sortcap{font-size:13px;color:var(--muted);margin:14px 0 6px}
-.sort{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:8px}
-.srow{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:10px;padding:8px 10px 8px 14px;background:var(--card);position:relative}
-.srow .rank{min-width:22px;font-family:var(--serif);font-size:20px;color:var(--teal)}
-.srow .txt{flex:1;font-size:16px;line-height:1.4}
-.srow .mv{font:inherit;font-size:14px;width:36px;height:36px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
-.srow .mv:focus-visible,.srow .grip:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
-.srow .grip{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:grab;touch-action:none;font-size:20px;user-select:none}
-.srow.drag{z-index:3;box-shadow:0 6px 18px rgba(0,0,0,.18);border-color:var(--teal)}
-.sort.locked .mv,.sort.locked .grip{opacity:.35;pointer-events:none}
-
-.note2{font-size:14px;color:var(--muted);margin:6px 0 0}
-.st{border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 14px;background:var(--card)}
-.st .head{display:flex;gap:12px;align-items:flex-start}
-.st .badge{flex:0 0 32px;height:32px;border-radius:50%;background:var(--teal);color:var(--on-teal);font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px}
-.st .tagm{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:1px 10px;color:var(--muted);margin:0 0 4px}
-.st .claim{font-size:19px;margin:0}
-.st .opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
-.st .opt{text-align:center;min-height:46px;font-weight:600}
-.st .opt[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--on-teal)}
-.st .opt.right,.st .opt.right[aria-pressed="true"]{background:var(--ok-bg);color:var(--teal);border:2px solid var(--teal)}
-.st .opt.wrong,.st .opt.wrong[aria-pressed="true"]{background:var(--no-bg);color:var(--danger);border:2px solid var(--danger)}
-.prog{font-size:14px;color:var(--muted);margin:6px 0 0}
-.sumline{font-family:var(--serif);font-size:22px;margin:6px 0 0;color:var(--teal)}
+.pickh{font-size:16px;font-weight:600;margin:22px 0 8px;color:var(--ink)}
+.opt.least[aria-pressed="true"]{border-color:#D4A017;background:#FEF3C7;color:var(--ink)}
+.opt .note{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.pickstat{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:21px}
+.prow{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 8px;background:var(--card)}
+.prow .ptxt{font-size:16px;line-height:1.4;margin:0}
+.prow .pbtns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pbtn{font:inherit;font-size:14px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.pbtn:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.pbtn:disabled{cursor:default;opacity:.55}
+.pbtn.most[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--on-teal);font-weight:600}
+.pbtn.least[aria-pressed="true"]{background:var(--pillbg);border-color:var(--pillbg);color:var(--pilltx);font-weight:600}
+.prow.is-most{border:2px solid var(--teal);background:var(--ok-bg)}
+.prow.is-least{border:2px solid var(--pillbg)}
 
 /* options */
 .opt{font:inherit;font-size:16px;text-align:left;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:10px 16px;cursor:pointer}
@@ -134,6 +152,7 @@ a{color:var(--teal)}
 .stack .opt{width:100%}
 .result{border-radius:10px;padding:12px 14px;margin:14px 0 0;border:1px solid var(--line)}
 .result.ok{background:var(--ok-bg);border-color:var(--teal)}
+.result.soft{background:var(--track)}
 .result.no{background:var(--no-bg);border-color:var(--danger)}
 .result b{display:block;margin-bottom:2px}
 .why{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
@@ -149,8 +168,8 @@ a{color:var(--teal)}
 .tbl th{font-weight:400;color:var(--muted);font-size:14px}
 .tbl td{font-variant-numeric:tabular-nums}
 .tbl small{display:block;font-weight:400;color:var(--muted);font-size:12px}
-.claim{font-family:var(--serif);font-size:21px;line-height:1.35;margin:16px 0 14px}
-.q{font-family:var(--serif);font-size:24px;line-height:1.35;max-width:30ch;margin:0 0 14px}
+.claim{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.35;margin:16px 0 14px}
+.q{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.35;max-width:30ch;margin:0 0 14px}
 .takeaways{margin:0 0 6px;padding-left:20px}
 .takeaways li{margin:0 0 6px}
 .slideimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;cursor:zoom-in}
@@ -174,7 +193,7 @@ dialog img{display:block;width:1400px;max-width:none;height:auto}
   .split .row{grid-template-columns:112px minmax(0,1fr) 48px}
   .stat b{font-size:26px}
 }
-@media (prefers-reduced-motion: reduce){.bar{transition:none!important}}
+@media (prefers-reduced-motion: reduce){.bar,.bar.anim{transition:none!important}.hd.pulse{animation:none}}
 </style>
 </head>
 <body>
@@ -218,29 +237,40 @@ dialog img{display:block;width:1400px;max-width:none;height:auto}
       </div>
       <div>
         <span class="pill">What they found</span>
-        <h2 style="font-size:24px">How much did achievement scores improve for each group?</h2>
-        <p class="lede" style="margin-bottom:12px">Drag the middle bar to where you think students ended up when they used NotebookLM independently, without guidance on how to use AI effectively.</p>
-        <p class="lede">The dashed line marks teaching alone.</p>
-        <p class="chart-label">Achievement gain on a 25-point test (post minus pre)</p>
-        <div class="row"><span class="lab">Teaching alone</span><div class="trk fixed"><div class="bar" style="width:38.67%;background:var(--gray)"></div></div><span class="val">+5.8</span></div>
-        <div class="row"><span class="lab" style="color:var(--ink)">Teaching + independent AI</span>
-          <div class="trk" id="trk" tabindex="0" role="slider" aria-label="Your guess for the independent AI gain, in points" aria-valuemin="0" aria-valuemax="15" aria-valuenow="5">
-            <div class="base"></div>
-            <div class="bar" id="act" style="width:0;background:var(--mid);z-index:1;transition:width .6s ease-out"></div>
-            <div class="bar" id="gbar" style="width:33.3%;background:var(--mid);opacity:.75;z-index:2"></div>
-            <span id="hint" style="position:absolute;right:12px;top:0;bottom:0;display:flex;align-items:center;font-size:13px;color:var(--muted);z-index:3;pointer-events:none">Drag to your guess</span>
-            <div id="hdl" style="position:absolute;top:50%;left:33.3%;width:20px;height:20px;border-radius:50%;background:var(--card);border:3px solid var(--teal);transform:translate(-50%,-50%);z-index:4"></div>
-          </div>
-          <span class="val" id="val" style="color:var(--teal)">?</span></div>
-        <div class="row"><span class="lab">Teaching + guided AI</span><div class="trk fixed"><div class="bar" style="width:87.33%;background:var(--teal)"></div></div><span class="val">+13.1</span></div>
-        <div class="row" style="margin:0"><span></span><div class="ticks"><span>0</span><span>5</span><span>10</span><span>15 points</span></div><span></span></div>
+        <div class="measure"><span class="mlab">How achievement was measured:</span> each group took the same test before and after the course. The gain is the post-test score minus the pre-test score, on a 25-point test.</div>
+        <h2 class="qhead">Teaching alone gained 5.8 points. Teaching + guided AI gained 13.1. Where do you think Teaching + independent AI landed?</h2>
+        <div class="disc" style="margin:0 0 12px">
+          <p class="dtxt" style="margin:0 0 6px">Discuss with your peers what you think happened, and why.</p>
+          <p class="bigq" style="margin:0">Was independent AI closer to teaching alone, closer to guided AI, or about halfway?</p>
+        </div>
+        <p class="lede dark" style="margin-bottom:6px">Then drag the marker to your guess.</p>
+
+        <div class="line" id="line">
+          <div class="rail"></div>
+          <div class="stop" style="left:21.5%"><b>+5.8</b>Teaching alone</div>
+          <div class="stop" style="left:77.7%"><b>+13.1</b>Teaching + guided AI</div>
+          <div class="real" id="real"></div>
+          <div class="hd pulse" id="hd" style="left:4%" role="slider" tabindex="0" aria-label="Your guess for the independent AI gain, in points" aria-valuemin="3" aria-valuemax="16" aria-valuenow="3.5"></div>
+          <div class="gv" id="gv" style="left:4%"></div>
+        </div>
         <p class="err" id="err" role="alert"></p>
         <div class="actions" style="margin-top:6px">
           <button class="btn primary" id="lock">Lock in my guess</button>
-          <button class="btn" id="again" hidden>Try again</button>
-          <button class="btn primary" id="n1" hidden>Next</button>
         </div>
         <p class="fb" id="fb" aria-live="polite"></p>
+
+        <div class="chartwrap" id="chartwrap" hidden>
+          <p class="chart-label">Achievement gain on a 25-point test (post minus pre)</p>
+          <div class="row"><span class="lab">Teaching alone</span><div class="trk fixed"><div class="bar anim" id="b0" style="width:0;background:var(--gray)"></div></div><span class="val" id="v0"></span></div>
+          <div class="row"><span class="lab" style="color:var(--ink)">Teaching + independent AI</span><div class="trk fixed"><div class="bar anim" id="b1" style="width:0;background:var(--mid)"></div><div class="gm" id="gm"></div></div><span class="val" id="v1" style="color:var(--teal)"></span></div>
+          <div class="row"><span class="lab">Teaching + guided AI</span><div class="trk fixed"><div class="bar anim" id="b2" style="width:0;background:var(--teal)"></div></div><span class="val" id="v2"></span></div>
+          <div class="row" style="margin:0"><span></span><div class="ticks"><span>0</span><span>5</span><span>10</span><span>15 points</span></div><span></span></div>
+          <p class="note2" style="margin-top:6px">Dashed line on the middle bar: your guess.</p>
+        </div>
+        <div class="actions" id="endactions" hidden>
+          <button class="btn" id="again">Try again</button>
+          <button class="btn primary" id="n1">Next</button>
+        </div>
         <p class="src">Source: Tezci (2026), Education and Information Technologies</p>
       </div>
     </div>
@@ -262,12 +292,14 @@ dialog img{display:block;width:1400px;max-width:none;height:auto}
       <p class="gnote"><b>Together, these may have contributed to the guided group’s extra +4.0 point gain</b> (+13.1, compared with +9.1 for independent use).</p>
     </div>
     <p class="lede" style="margin:20px 0 12px"><b>Here’s the catch:</b> the study bundled all five together, so we don’t know which one had value.</p>
-    <p class="lede">As a group, discuss your own experience and make your best educated guess at the order, with the most valuable at the top. Drag the handle, or use the arrows.</p>
-    <p class="sortcap" id="cap1">Most valuable</p>
-    <ol class="sort" id="sort"></ol>
-    <p class="sortcap" id="cap2">Least valuable</p>
+    <p class="pickh">1. As a group, discuss which intervention you think would be the most helpful.</p>
+    <div class="stack" id="pickA" role="group" aria-label="Most helpful"></div>
+    <p class="pickh">2. Now, which would be the least impactful?</p>
+    <div class="stack" id="pickB" role="group" aria-label="Least impactful"></div>
+    <p class="pickstat" id="pickstat" aria-live="polite"></p>
+    <p class="err" id="perr" role="alert"></p>
     <div class="actions">
-      <button class="btn primary" id="slock">Lock in my order</button>
+      <button class="btn primary" id="slock">Submit</button>
       <button class="btn primary" id="n2" hidden>Next</button>
     </div>
     <div class="result ok" id="sres" hidden aria-live="polite"><b>There’s no right answer here.</b>This is a known limitation of the research. The study compared guided use with unguided use as a whole, so it can’t say which part mattered.</div>
@@ -353,59 +385,75 @@ dialog img{display:block;width:1400px;max-width:none;height:auto}
   $('start').addEventListener('click', function () { go(1); });
   $('n1').addEventListener('click', function () { go(2); });
   $('n2').addEventListener('click', function () { go(3); });
-  $('restart').addEventListener('click', function () { resetQ(); resetG(); resetClaims(); go(0); });
+  $('restart').addEventListener('click', function () { resetQ(); resetG(); resetClaims(); resetSteps(); go(0); });
 
-  /* ---------- page 1: guess the middle bar ---------- */
-  var MAX = 15, A = 9.1, BASE = 5.8, GUIDED = 13.1, guess = 5, moved = false, locked = false, drag = false;
-  var trk = $('trk'), gbar = $('gbar'), hdl = $('hdl'), act = $('act'), val = $('val'), hint = $('hint'), err = $('err'), fb = $('fb');
+  /* ---------- page 1: one guess on a line, then the bars build ---------- */
+  var LO = 3, HI = 16, A = 9.1, BASE = 5.8, GUIDED = 13.1, MAXB = 15;
+  var line = $('line'), hd = $('hd'), gv = $('gv'), real = $('real'), err = $('err'), fb = $('fb');
   var lock = $('lock'), again = $('again'), n1 = $('n1');
+  var guess = 3.5, moved = false, drag = false, locked = false;
+  function pos(v) { return (v - LO) / (HI - LO) * 100; }
   function render() {
-    var p = guess / MAX * 100;
-    gbar.style.width = p + '%'; hdl.style.left = p + '%';
-    trk.setAttribute('aria-valuenow', guess);
-    if (moved && !locked) { val.textContent = '+' + guess.toFixed(1); hint.style.display = 'none'; }
+    hd.style.left = pos(guess) + '%'; gv.style.left = pos(guess) + '%';
+    hd.setAttribute('aria-valuenow', guess.toFixed(1));
+    if (moved) { gv.textContent = '+' + guess.toFixed(1); }
   }
   function setFrom(e) {
-    var r = trk.getBoundingClientRect();
-    var v = (e.clientX - r.left) / r.width * MAX;
-    guess = Math.round(Math.max(0, Math.min(MAX, v)) * 10) / 10;
-    moved = true; err.textContent = ''; render();
+    var r = line.getBoundingClientRect();
+    var v = LO + (e.clientX - r.left) / r.width * (HI - LO);
+    guess = Math.round(Math.max(LO, Math.min(HI, v)) * 10) / 10;
+    if (!moved) { moved = true; hd.classList.remove('pulse'); }
+    err.textContent = ''; render();
   }
-  trk.addEventListener('pointerdown', function (e) { if (locked) return; drag = true; trk.setPointerCapture(e.pointerId); setFrom(e); });
-  trk.addEventListener('pointermove', function (e) { if (drag && !locked) setFrom(e); });
-  trk.addEventListener('pointerup', function () { drag = false; });
-  trk.addEventListener('keydown', function (e) {
+  line.addEventListener('pointerdown', function (e) { if (locked) return; drag = true; line.setPointerCapture(e.pointerId); setFrom(e); });
+  line.addEventListener('pointermove', function (e) { if (drag && !locked) setFrom(e); });
+  line.addEventListener('pointerup', function () { drag = false; });
+  hd.addEventListener('keydown', function (e) {
     if (locked) return;
-    var s = e.shiftKey ? 1 : 0.1;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { guess = Math.min(MAX, Math.round((guess + s) * 10) / 10); }
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { guess = Math.max(0, Math.round((guess - s) * 10) / 10); }
+    var st = e.shiftKey ? 1 : 0.1;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { guess = Math.min(HI, Math.round((guess + st) * 10) / 10); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { guess = Math.max(LO, Math.round((guess - st) * 10) / 10); }
     else { return; }
-    moved = true; err.textContent = ''; render(); e.preventDefault();
+    moved = true; hd.classList.remove('pulse'); err.textContent = ''; render(); e.preventDefault();
   });
+  function countUp(el, to) {
+    var t0 = null;
+    function step(ts) { if (t0 === null) { t0 = ts; } var p = Math.min(1, (ts - t0) / 900); el.textContent = '+' + (to * p).toFixed(1); if (p < 1) { requestAnimationFrame(step); } }
+    requestAnimationFrame(step);
+  }
+  function build(i, v) { $('b' + i).style.width = (v / MAXB * 100) + '%'; countUp($('v' + i), v); }
   lock.addEventListener('click', function () {
-    if (!moved) { err.textContent = 'Drag the middle bar to your guess first.'; return; }
-    locked = true;
-    act.style.width = (A / MAX * 100) + '%';
-    gbar.style.background = 'transparent'; gbar.style.opacity = '1'; gbar.style.border = '2px dashed var(--ink)';
-    val.textContent = '+' + A.toFixed(1); hint.style.display = 'none';
+    if (!moved) { err.textContent = 'Drag the marker to your guess first.'; return; }
+    locked = true; lock.hidden = true;
+    real.style.left = pos(A) + '%'; real.style.display = 'block';
     var d = Math.round((A - guess) * 10) / 10, lead;
     if (Math.abs(d) <= 1) { lead = 'Very close. You guessed +' + guess.toFixed(1) + '.'; }
     else if (d > 0) { lead = 'Higher than you guessed (+' + guess.toFixed(1) + ').'; }
     else { lead = 'Lower than you guessed (+' + guess.toFixed(1) + ').'; }
     if (guess < BASE) { lead += ' You guessed it would do worse than teaching alone.'; }
-    fb.textContent = lead + ' Using NotebookLM on their own, students gained +9.1 points: 3.3 more than teaching alone. Weekly teacher guidance added another 4.0 on top (+13.1).';
-    lock.hidden = true; again.hidden = false; n1.hidden = false;
+    fb.textContent = lead + ' Using NotebookLM on their own, students gained +9.1 points: about 45% of the way from teaching alone to guided AI, so a bit closer to teaching alone. Weekly teacher guidance added another 4.0 on top (+13.1).';
+    $('chartwrap').hidden = false;
+    var gm = $('gm'); gm.style.left = (guess / MAXB * 100) + '%';
+    build(0, BASE);
+    setTimeout(function () { build(1, A); gm.style.display = 'block'; }, 1000);
+    setTimeout(function () { build(2, GUIDED); }, 2000);
+    setTimeout(function () { $('endactions').hidden = false; }, 3000);
+    $('chartwrap').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   });
   function resetQ() {
-    locked = false; moved = false; guess = 5;
-    act.style.width = '0'; gbar.style.background = 'var(--mid)'; gbar.style.opacity = '.75'; gbar.style.border = 'none';
-    val.textContent = '?'; hint.style.display = 'flex'; fb.textContent = ''; err.textContent = '';
-    lock.hidden = false; again.hidden = true; n1.hidden = true; render();
+    locked = false; moved = false; guess = 3.5; drag = false;
+    hd.classList.add('pulse'); gv.textContent = ''; real.style.display = 'none';
+    lock.hidden = false; $('endactions').hidden = true; fb.textContent = ''; err.textContent = '';
+    $('chartwrap').hidden = true; $('gm').style.display = 'none';
+    ['b0', 'b1', 'b2'].forEach(function (id) { $(id).style.width = '0'; });
+    ['v0', 'v1', 'v2'].forEach(function (id) { $(id).textContent = ''; });
+    render();
   }
+  function resetSteps() { /* kept for the Start over button; resetQ does the work */ }
   again.addEventListener('click', resetQ);
   render();
 
-  /* ---------- page 2: reorder the five parts ---------- */
+  /* ---------- page 2: pick the most helpful, then the least impactful ---------- */
   var parts = [
     'The instructor showed how to use NotebookLM well',
     'Coaching on writing and refining prompts',
@@ -413,80 +461,44 @@ dialog img{display:block;width:1400px;max-width:none;height:auto}
     'Group discussion of AI responses, with misunderstandings cleared up',
     'Practice on their own, including finding their own errors'
   ];
-  var sortEl = $('sort'), slocked = false;
-  function renumber() { Array.prototype.forEach.call(sortEl.children, function (li, i) { li.querySelector('.rank').textContent = i + 1; }); }
-  function buildSort() {
-    sortEl.innerHTML = '';
-    parts.forEach(function (t) {
-      var li = document.createElement('li'); li.className = 'srow';
-      var rk = document.createElement('span'); rk.className = 'rank';
-      var tx = document.createElement('span'); tx.className = 'txt'; tx.textContent = t;
-      var up = document.createElement('button'); up.className = 'mv'; up.textContent = '▲'; up.setAttribute('aria-label', 'Move up: ' + t); up.setAttribute('data-d', '-1');
-      var dn = document.createElement('button'); dn.className = 'mv'; dn.textContent = '▼'; dn.setAttribute('aria-label', 'Move down: ' + t); dn.setAttribute('data-d', '1');
-      var gr = document.createElement('span'); gr.className = 'grip'; gr.textContent = '⠿'; gr.setAttribute('aria-hidden', 'true');
-      li.appendChild(rk); li.appendChild(tx); li.appendChild(up); li.appendChild(dn); li.appendChild(gr);
-      sortEl.appendChild(li);
+  var mostI = -1, leastI = -1, plocked = false;
+  function drawList(el, which) {
+    el.innerHTML = '';
+    parts.forEach(function (t, i) {
+      var b = document.createElement('button');
+      b.className = 'opt' + (which === 'B' ? ' least' : '');
+      var sel = (which === 'A' ? mostI : leastI) === i;
+      var blocked = (which === 'B' && i === mostI);
+      b.setAttribute('aria-pressed', String(sel));
+      var tx = document.createElement('span'); tx.textContent = t; b.appendChild(tx);
+      if (blocked) { var nt = document.createElement('span'); nt.className = 'note'; nt.textContent = 'picked as most helpful'; b.appendChild(nt); }
+      b.disabled = plocked || blocked;
+      b.addEventListener('click', function () {
+        if (which === 'A') { mostI = (mostI === i) ? -1 : i; if (leastI === mostI) { leastI = -1; } }
+        else { leastI = (leastI === i) ? -1 : i; }
+        $('perr').textContent = ''; drawPicks();
+      });
+      el.appendChild(b);
     });
-    renumber();
   }
-  sortEl.addEventListener('click', function (e) {
-    var btn = e.target.closest('.mv'); if (!btn || slocked) return;
-    var li = btn.closest('li'), d = parseInt(btn.getAttribute('data-d'), 10);
-    if (d < 0 && li.previousElementSibling) { sortEl.insertBefore(li, li.previousElementSibling); }
-    else if (d > 0 && li.nextElementSibling) { sortEl.insertBefore(li.nextElementSibling, li); }
-    renumber(); btn.focus();
-  });
-  var dragLi = null, startY = 0, idx = 0, cents = [], hgt = 0, tgt = 0;
-  sortEl.addEventListener('pointerdown', function (e) {
-    if (slocked) return;
-    var g = e.target.closest('.grip'); if (!g) return;
-    dragLi = g.closest('li');
-    var items = Array.prototype.slice.call(sortEl.children);
-    idx = items.indexOf(dragLi); tgt = idx; startY = e.clientY;
-    cents = items.map(function (x) { var r = x.getBoundingClientRect(); return r.top + r.height / 2; });
-    hgt = dragLi.getBoundingClientRect().height + 8;
-    dragLi.classList.add('drag');
-    g.setPointerCapture(e.pointerId); e.preventDefault();
-  });
-  sortEl.addEventListener('pointermove', function (e) {
-    if (!dragLi) return;
-    var dy = e.clientY - startY, items = Array.prototype.slice.call(sortEl.children);
-    dragLi.style.transform = 'translateY(' + dy + 'px)';
-    var c = cents[idx] + dy, best = 0, bd = 1e9;
-    cents.forEach(function (v, k) { var dd = Math.abs(v - c); if (dd < bd) { bd = dd; best = k; } });
-    tgt = best;
-    items.forEach(function (x, k) {
-      if (x === dragLi) return;
-      var sh = 0;
-      if (k > idx && k <= tgt) { sh = -hgt; } else if (k < idx && k >= tgt) { sh = hgt; }
-      x.style.transform = sh ? 'translateY(' + sh + 'px)' : '';
-      x.style.transition = 'transform .12s';
-    });
-  });
-  function endDrag() {
-    if (!dragLi) return;
-    var items = Array.prototype.slice.call(sortEl.children);
-    items.forEach(function (x) { x.style.transform = ''; x.style.transition = ''; });
-    dragLi.classList.remove('drag');
-    if (tgt !== idx) {
-      sortEl.removeChild(dragLi);
-      var ref = sortEl.children[tgt] || null;
-      sortEl.insertBefore(dragLi, ref);
+  function drawPicks() {
+    drawList($('pickA'), 'A'); drawList($('pickB'), 'B');
+    if (!plocked) {
+      $('pickstat').textContent = 'Most helpful: ' + (mostI > -1 ? 'chosen' : 'not chosen yet') + '. Least impactful: ' + (leastI > -1 ? 'chosen' : 'not chosen yet') + '.';
     }
-    dragLi = null; renumber();
   }
-  sortEl.addEventListener('pointerup', endDrag);
-  sortEl.addEventListener('pointercancel', endDrag);
   $('slock').addEventListener('click', function () {
-    slocked = true; sortEl.classList.add('locked');
-    Array.prototype.forEach.call(sortEl.querySelectorAll('.mv'), function (b) { b.disabled = true; });
+    if (mostI < 0 || leastI < 0) { $('perr').textContent = 'Choose one most helpful and one least impactful first.'; return; }
+    plocked = true; drawPicks();
+    $('pickstat').textContent = 'Your group picked “' + parts[mostI] + '” as the most helpful and “' + parts[leastI] + '” as the least impactful.';
     $('slock').hidden = true; $('sres').hidden = false; $('n2').hidden = false;
+    $('sres').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   });
   function resetG() {
-    slocked = false; sortEl.classList.remove('locked'); buildSort();
-    $('slock').hidden = false; $('sres').hidden = true; $('n2').hidden = true;
+    mostI = -1; leastI = -1; plocked = false; $('perr').textContent = '';
+    $('slock').hidden = false; $('sres').hidden = true; $('n2').hidden = true; drawPicks();
   }
-  buildSort();
+  drawPicks();
 
   /* ---------- page 3: test anxiety and self-efficacy (all three at once) ---------- */
   var claims = [
